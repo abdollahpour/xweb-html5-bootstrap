@@ -14,7 +14,7 @@ If you are using Maven you can simply add UI to  you application by adding (to w
 	...
 <dependencies>
 
-
+```xml
 <build>
 	<finalName>pdroid</finalName>
 	...
@@ -38,7 +38,7 @@ If you are using Maven you can simply add UI to  you application by adding (to w
 	</plugins>
 	...
 </build>
-
+```
 
 
 
