@@ -2,15 +2,15 @@
 <html lang='fa'>
 <head>
 	<meta charset='utf-8' />
-	<title>ورد به سیستم</title>
+	<title>Login</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap -->
-	<link href="/bootstrap/css/bootstrap.rtl.css" rel="stylesheet" media="screen">
+	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
 
 	<script src="/js/libs/jquery-last.js"></script>
 	<script src="/js/libs/jquery.md5.js"></script>
 	<script src="/js/libs/jquery.cookie.js"></script>
-	<script src="/bootstrap/js/bootstrap-rtl.js"></script>
+	<script src="/bootstrap/js/bootstrap.js"></script>
 
 	<style>
 		body {
@@ -84,24 +84,24 @@
 <div class="container">
 	<div class="row">
 		<div class="span4 offset4 well">
-			<legend>ورود به سیستم</legend>
+			<legend>Login into system</legend>
 			<div class="alert alert-error" id='error'>
-				<a class="close" data-dismiss="alert" href="#">×</a>اطلاعات وارد شده صحیح نیست
+				<a class="close" data-dismiss="alert" href="#">×</a>Please enter currect data
 			</div>
 			<form method="POST" accept-charset="UTF-8">
-				<input type="text" class="span4" name="id" placeholder="نام کاربری">
-				<input type="password" class="span4" name="password" placeholder="رمز عبور">
+				<input type="text" class="span4" name="id" placeholder="Username">
+				<input type="password" class="span4" name="password" placeholder="Password">
 				<img id='captchacode' src='/api?api=captcha'>
 				<button id='btn-refresh' type='button' class='btn btn-lg btn-default'><i class="icon-search icon-refresh"></i></button>
-				<input type="text" class="span4" name="captcha" placeholder="کد امنیتی">
+				<input type="text" class="span4" name="captcha" placeholder="Security code">
 				<label class="checkbox">
-					<input type="checkbox" name="remember" value="1"> مرا به خاطر بسپار
+					<input type="checkbox" name="remember" value="1">Remember me
 				</label>
-				<button type="submit" name="submit" class="btn btn-info btn-block">ورود به سیستم</button>
+				<button type="submit" name="submit" class="btn btn-info btn-block">Login</button>
 			</form>
 
 			<div id='loading'>
-				<p>لطفا صبر کنید ...</p>
+				<p>Please wait ...</p>
 				<div class="progress progress-striped active" id="progressouter">
 
 					<div class="bar" id="progress" style="width: 100%;"></div>
