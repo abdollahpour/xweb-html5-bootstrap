@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<title>دانشنامه</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+
+	<script src="/js/libs/jquery-last.js"></script>
+	<script src="/bootstrap/js/bootstrap.js"></script>
+
+	<style>
+		body {
+			padding-top: 10px;
+		}
+		img.location-center {
+			display: block;
+			height: auto;
+			margin: auto;
+			padding: 1em;
+		}
+	</style>
+
+	<script>
+
+		$(document).ready(function() {
+			$.get("/api", {
+					api: 'wiki',
+					get: 'list'
+				}, function(data) {
+					$("#sidebar").html(data).find('ul').addClass('nav nav-list');
+				});
+
+			var s = String(location);
+			var index = s.lastIndexOf('/');
+			page = s.substring(index + 1);
+
+		    if(page == 'fa' || page.length == 0) {
+		    	page = 'start';
+			} else {
+				page = decodeURIComponent(page);
+			}
+
+			$('#content').load('/api', {
+				api: 'wiki',
+				get: page
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span3 well" stlye='width: 400px' id='sidebar'>
+				<div>
+					<p>Please wait ...</p>
+					<div class="progress progress-striped active">
+
+						<div class="bar" style="width: 100%;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="span9" id='content'>
+				<div style="width: 50%; margin: auto">
+					<p>Loading. Please wait ...</p>
+					<div class="progress progress-striped active">
+
+						<div class="bar" style="width: 100%;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class='breadcrumb' style="text-align: center">Created by <a title="XWeb wiki module for XWeb" href='https://github.com/abdollahpour/xweb-wiki'>xweb-wiki</a></div>
+	</div>
+</body>
+</html>

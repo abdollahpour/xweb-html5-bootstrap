@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang='fa'>
+<head>
+	<meta charset='utf-8' />
+	<title>Bootstrap 101 Template</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap -->
+	<link href="/bootstrap/css/bootstrap.rtl.css" rel="stylesheet" media="screen">
+
+	<script src="/js/libs/jquery-last.js"></script>
+	<script src="/bootstrap/js/bootstrap-rtl.min.js"></script>
+
+	<style>
+		body {
+			margin-top: 3em;
+		}
+		.alert-error {
+			display: none;
+		}
+		#loading {
+			display: none;
+		}
+	</style>
+
+	<script>
+		// preload images
+			if (document.images) {
+			img1 = new Image();
+			img1.src = 'image/xweb/default/wait.gif';
+		}
+
+		$(document).ready(function() {
+			$('.close').click(function() {
+				$(this).parent().remove();
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="span4 offset4 well">
+			<legend>ورود به سیستم</legend>
+			<div class="alert alert-error">
+				<a class="close" data-dismiss="alert" href="#">×</a>رمز عبور یا نام کاربری اشتباه است
+			</div>
+			<form method="POST" action="" accept-charset="UTF-8">
+				<input type="text" id="username" class="span4" name="username" placeholder="نام کاربری">
+				<input type="password" id="password" class="span4" name="password" placeholder="رمز عبور">
+				<input type="text" id="captcha" class="span4" name="captcha" placeholder="کد امنیتی">
+				<label class="checkbox">
+					<input type="checkbox" name="remember" value="1"> مرا به خاطر بسپار
+				</label>
+				<button type="submit" name="submit" class="btn btn-info btn-block">ورود به سیستم</button>
+			</form>
+
+			<div id='loading'>
+				<p>لطفا صبر کنید ...</p>
+				<div class="progress progress-striped active" id="progressouter">
+
+					<div class="bar" id="progress" style="width: 100%;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
