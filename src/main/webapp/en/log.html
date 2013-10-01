@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<title>دانشنامه</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+
+	<script src="/js/libs/jquery-last.js"></script>
+	<script src="jquery.scrollintoview.min"></script>
+	<script src="/bootstrap/js/bootstrap.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="/js/libs/html5shiv.js"></script>
+		<script src="/js/libs/respond.min.js"></script>
+	<![endif]-->
+
+	<style>
+		body {
+			padding-top: 10px;
+		}
+		img.location-center {
+			display: block;
+			height: auto;
+			margin: auto;
+			padding: 1em;
+		}
+		p {
+			padding: .4em;
+		} 
+		.TRACE {
+			color: #999;
+		}
+		.DEBUG {
+			color: black;
+		}
+		.INFO {
+			color: #050;
+		}
+		.ERROR {
+			color: #600;
+			background-color: #FEE;
+		}
+
+		/** There's a problem in modal position. We use some hack to fix it **/
+		.modal.fade.in {
+			top: 80%;
+		}
+
+		#container {
+			background: white;
+			padding: 50px .6em .6em 1.4em;
+		}
+
+		#container pre {
+			border: none;
+			padding: 0;
+			margin: 0;
+			border-radius: 0;
+		}
+	</style>
+
+	<script>
+		$(document).ready(function () {
+			$(document).ajaxError(function(e, jqxhr, settings, exception) {
+				if(jqxhr.status == 401) {
+					window.location = 'login.html?url=log.html';
+				} else {
+					addLog((new Date()) + " Error to reach to server", "ERROR");
+				}
+			});
+
+
+			reload();
+			var interval = window.setInterval(reload, 5000);
+
+			$('#activing .btn').click(function() {
+				if($(this).text() == 'Active') {
+					interval = window.setInterval(reload, 5000);
+				} else {
+					window.clearInterval(interval);
+				}
+			});
+
+			$('#clear_logs').click(function() {
+				$('#container').empty();
+			});
+		});
+
+		function reload() {
+			$.ajax({ type: 'GET',   
+				url: '/api?api=log',   
+				dataType: 'text',
+				success : function(text) {
+					addLog(text);
+				}
+			});
+		}
+
+		function getType(line) {
+			var index1 = line.indexOf("] ");
+			if(index1 > -1) {
+				var index2 = line.indexOf(" ", index1 + 2);
+				if(index2 > -1) {
+					return line.substring(index1 + 2, index2);
+				}
+			}
+		}
+
+		function addLog(text, type) {
+			var shouldScroll = ($(document).height() - $(window).height()) > 20;
+
+			if(typeof(type) == 'undefined') {
+				type = getType(text);
+			}
+
+			var container = $('#container');
+
+			var lines = text.split("\n");
+			for(var i=0; i<lines.length; i++) {
+				var line = lines[i];
+
+				$("<pre></pre>").addClass(type).text(line).appendTo(container);
+			}
+
+			if(container.length > 400) {
+				container.slice(0, 200).empty();
+			}
+
+			//if(shouldScroll) {
+			//	$("html, body").animate({scrollTop: $(document).height() - $(window).height()});
+			//}
+			$('#scrollwatch').scrollintoview();
+		}
+	</script>
+</head>
+<body>
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">Log manager</a>
+				<div class="nav-collapse collapse">
+					<div id="activing" class="btn-group" data-toggle="buttons-radio" style='display: inline-block'>
+						<button name="color" type="button" class="btn active" value="btn-success">Active</button>
+						<button name="color" type="button" class="btn btn-danger" value="btn-danger">Deactive</button>
+					</div>
+					<form class='navbar-form pull-right'>
+						<!--<a href="#myModal" role="button" class="btn btn-danger" data-toggle="modal">Clear logs</a>-->
+						<a id="clear_logs" href="#myModal" role="button" class="btn btn-danger" data-toggle="modal">Clear logs</a>
+					</form>
+
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+
+    <div id="container"></div> <!-- /container -->
+
+    <div id='scrollwatch'></div>
+
+	<!--<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Clear logs</h3>
+		</div>
+		<div class="modal-body">
+			<p>Do you want to clear logs?</p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+			<button class="btn btn-danger">Clear now!</button>
+		</div>
+	</div>-->
+
+</body>
+</html>
