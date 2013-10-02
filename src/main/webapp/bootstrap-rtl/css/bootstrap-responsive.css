@@ -1,12 +1,11 @@
 /*!
- * Bootstrap Responsive v2.1.0
+ * Bootstrap Responsive v2.3.2
  *
  * Copyright 2012 Twitter, Inc
  * Licensed under the Apache License v2.0
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
- * RTLed by CSSJanus "http://cssjanus.commoner.com" & @AbdullahDiaa
  */
 
 .clearfix {
@@ -39,6 +38,10 @@
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+@-ms-viewport {
+  width: device-width;
 }
 
 .hidden {
@@ -92,6 +95,19 @@
   }
 }
 
+.visible-print {
+  display: none !important;
+}
+
+@media print {
+  .visible-print {
+    display: inherit !important;
+  }
+  .hidden-print {
+    display: none !important;
+  }
+}
+
 @media (min-width: 1200px) {
   .row {
     margin-right: -30px;
@@ -108,6 +124,7 @@
   }
   [class*="span"] {
     float: right;
+    min-height: 1px;
     margin-right: 30px;
   }
   .container,
@@ -214,6 +231,9 @@
   }
   .row-fluid [class*="span"]:first-child {
     margin-right: 0;
+  }
+  .row-fluid .controls-row [class*="span"] + [class*="span"] {
+    margin-left: 2.564102564102564%;
   }
   .row-fluid .span12 {
     width: 100%;
@@ -454,6 +474,7 @@
   }
   [class*="span"] {
     float: right;
+    min-height: 1px;
     margin-right: 20px;
   }
   .container,
@@ -560,6 +581,9 @@
   }
   .row-fluid [class*="span"]:first-child {
     margin-right: 0;
+  }
+  .row-fluid .controls-row [class*="span"] + [class*="span"] {
+    margin-left: 2.7624309392265194%;
   }
   .row-fluid .span12 {
     width: 100%;
@@ -777,13 +801,14 @@
 
 @media (max-width: 767px) {
   body {
-    padding-left: 20px;
     padding-right: 20px;
+    padding-left: 20px;
   }
   .navbar-fixed-top,
-  .navbar-fixed-bottom {
-    margin-left: -20px;
+  .navbar-fixed-bottom,
+  .navbar-static-top {
     margin-right: -20px;
+    margin-left: -20px;
   }
   .container-fluid {
     padding: 0;
@@ -812,11 +837,15 @@
     margin-right: 0;
   }
   [class*="span"],
+  .uneditable-input[class*="span"],
   .row-fluid [class*="span"] {
     display: block;
     float: none;
-    width: auto;
+    width: 100%;
     margin-right: 0;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
   }
   .span12,
   .row-fluid .span12 {
@@ -824,6 +853,9 @@
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
+  }
+  .row-fluid [class*="offset"]:first-child {
+    margin-left: 0;
   }
   .input-large,
   .input-xlarge,
@@ -846,16 +878,22 @@
     display: inline-block;
     width: auto;
   }
+  .controls-row [class*="span"] + [class*="span"] {
+    margin-right: 0;
+  }
   .modal {
     position: fixed;
     top: 20px;
-    left: 20px;
     right: 20px;
+    left: 20px;
     width: auto;
     margin: 0;
   }
+  .modal.fade {
+    top: -100px;
+  }
   .modal.fade.in {
-    top: auto;
+    top: 20px;
   }
 }
 
@@ -871,7 +909,7 @@
   input[type="radio"] {
     border: 1px solid #ccc;
   }
-  .form-horizontal .control-group > label {
+  .form-horizontal .control-label {
     float: none;
     width: auto;
     padding-top: 0;
@@ -884,13 +922,23 @@
     padding-top: 0;
   }
   .form-horizontal .form-actions {
-    padding-left: 10px;
     padding-right: 10px;
+    padding-left: 10px;
+  }
+  .media .pull-left,
+  .media .pull-right {
+    display: block;
+    float: none;
+    margin-bottom: 10px;
+  }
+  .media-object {
+    margin-right: 0;
+    margin-left: 0;
   }
   .modal {
     top: 10px;
-    left: 10px;
     right: 10px;
+    left: 10px;
   }
   .modal-header .close {
     padding: 10px;
@@ -924,8 +972,8 @@
     padding: 0;
   }
   .navbar .brand {
-    padding-left: 10px;
     padding-right: 10px;
+    padding-left: 10px;
     margin: 0 -5px 0 0;
   }
   .nav-collapse {
@@ -945,14 +993,14 @@
     display: none;
   }
   .nav-collapse .nav .nav-header {
-    color: #555555;
+    color: #777777;
     text-shadow: none;
   }
   .nav-collapse .nav > li > a,
   .nav-collapse .dropdown-menu a {
     padding: 9px 15px;
     font-weight: bold;
-    color: #555555;
+    color: #777777;
     -webkit-border-radius: 3px;
        -moz-border-radius: 3px;
             border-radius: 3px;
@@ -968,11 +1016,19 @@
     margin-bottom: 2px;
   }
   .nav-collapse .nav > li > a:hover,
-  .nav-collapse .dropdown-menu a:hover {
+  .nav-collapse .nav > li > a:focus,
+  .nav-collapse .dropdown-menu a:hover,
+  .nav-collapse .dropdown-menu a:focus {
     background-color: #f2f2f2;
   }
+  .navbar-inverse .nav-collapse .nav > li > a,
+  .navbar-inverse .nav-collapse .dropdown-menu a {
+    color: #999999;
+  }
   .navbar-inverse .nav-collapse .nav > li > a:hover,
-  .navbar-inverse .nav-collapse .dropdown-menu a:hover {
+  .navbar-inverse .nav-collapse .nav > li > a:focus,
+  .navbar-inverse .nav-collapse .dropdown-menu a:hover,
+  .navbar-inverse .nav-collapse .dropdown-menu a:focus {
     background-color: #111111;
   }
   .nav-collapse.in .btn-group {
@@ -983,7 +1039,7 @@
     position: static;
     top: auto;
     right: auto;
-    display: block;
+    display: none;
     float: none;
     max-width: none;
     padding: 0;
@@ -997,11 +1053,18 @@
        -moz-box-shadow: none;
             box-shadow: none;
   }
+  .nav-collapse .open > .dropdown-menu {
+    display: block;
+  }
   .nav-collapse .dropdown-menu:before,
   .nav-collapse .dropdown-menu:after {
     display: none;
   }
   .nav-collapse .dropdown-menu .divider {
+    display: none;
+  }
+  .nav-collapse .nav > li > .dropdown-menu:before,
+  .nav-collapse .nav > li > .dropdown-menu:after {
     display: none;
   }
   .nav-collapse .navbar-form,
@@ -1015,7 +1078,12 @@
        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   }
-  .navbar .nav-collapse .nav.pull-right {
+  .navbar-inverse .nav-collapse .navbar-form,
+  .navbar-inverse .nav-collapse .navbar-search {
+    border-top-color: #111111;
+    border-bottom-color: #111111;
+  }
+  .navbar .nav-collapse .nav.pull-left {
     float: none;
     margin-right: 0;
   }
@@ -1028,8 +1096,8 @@
     display: block;
   }
   .navbar-static .navbar-inner {
-    padding-left: 10px;
     padding-right: 10px;
+    padding-left: 10px;
   }
 }
 
