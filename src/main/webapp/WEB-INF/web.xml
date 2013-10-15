@@ -2,8 +2,42 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
-	<display-name>Archetype Created Web Application</display-name>
+<web-app id="xweb">
+	<display-name>XWeb</display-name>
+	<description>XWeb HTML5 bootstrap</description>
+
+	<!-- XWEB requirements -->
+	<filter>
+		<filter-name>XWebFilter</filter-name>
+		<filter-class>ir.xweb.server.XWebFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>XWebFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>ir.xweb.server.XWebListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>api</servlet-name>
+		<display-name>api</display-name>
+		<description>Handle system API</description>
+		<servlet-class>ir.xweb.server.XWebServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>api</servlet-name>
+		<url-pattern>/api</url-pattern>
+	</servlet-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>/</welcome-file>
+	</welcome-file-list>
 
 	<error-page>
 		<error-code>404</error-code>

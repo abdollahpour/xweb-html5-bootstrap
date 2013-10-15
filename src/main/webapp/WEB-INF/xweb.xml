@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xweb version='1.0'>
+
+	<properties>
+		<property key='default.user'>admin@yourdomain.com</property>
+		<property key='default.dir.store'>${xweb.base}/data/demo</property>
+	</properties>
+
+	<modules>
+
+		<module>
+			<name>redirect</name>
+			<author>Hamed Abdollahpour</author>
+			<class>ir.xweb.module.RedirectModule</class>
+			<properties>
+				<!-- default language English -->
+				<property key='/'>/en/index.html</property>
+			</properties>
+		</module>
+
+	</modules>
+
+</xweb>
