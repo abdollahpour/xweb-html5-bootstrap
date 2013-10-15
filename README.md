@@ -11,12 +11,22 @@ You can create XWeb applications in minuets!
 This document is for Linux but it also work with other operation systems.
 
 First, you need to create your own git repository
+
 `git init`
 
 Second, add xweb-bootstrap as upstream of your project
+
 `git remote add upstream https://github.com/abdollahpour/xweb-html5-bootstrap.git`
 
 Thirds, OK! You can make your changes right now!
+
+You can run the application (http://localhost:8080/):
+
+'maven clean jetty:run'
+
+Or you can publish var file (target/ directory)
+
+'mvn clean install'
 
 ## Notes
 * For more information about xweb modules and configurations go to (xweb wiki)[https://github.com/abdollahpour/xweb/wiki]

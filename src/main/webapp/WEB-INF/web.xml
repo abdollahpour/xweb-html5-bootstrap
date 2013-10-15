@@ -7,16 +7,6 @@
 	<description>XWeb HTML5 bootstrap</description>
 
 	<!-- XWEB requirements -->
-	<filter>
-		<filter-name>XWebFilter</filter-name>
-		<filter-class>ir.xweb.server.XWebFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>XWebFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
 	<listener>
 		<listener-class>ir.xweb.server.XWebListener</listener-class>
 	</listener>
@@ -34,6 +24,15 @@
 		<url-pattern>/api</url-pattern>
 	</servlet-mapping>
 
+	<filter>
+		<filter-name>XWebFilter</filter-name>
+		<filter-class>ir.xweb.server.XWebFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>XWebFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<welcome-file-list>
 		<welcome-file>/</welcome-file>
